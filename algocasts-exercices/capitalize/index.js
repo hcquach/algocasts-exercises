@@ -11,9 +11,9 @@ function capitalize(str) {
   const str_array = [];
   str.split(" ").forEach(function(word) {
     const word_capitalize = word[0].toUpperCase() + word.slice(1);
-    console.log(word_capitalize);
+    // console.log(word_capitalize);
     str_array.push(word_capitalize);
-    console.log(str_array);
+    // console.log(str_array);
   });
   return str_array.join(" ");
 }
