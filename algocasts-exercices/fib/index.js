@@ -8,13 +8,31 @@
 // Example:
 //   fib(4) === 3
 
-function fib(n) {
-  const fibArray = [0, 1];
-  let sum = 1;
-  for (let i = 2; i <= n; i++) {
-    fibArray[i] = fibArray[i - 1] + fibArray[i - 2]
-  }
-  return fibArray[fibArray.length - 1];
+function memoize(fn) {
+  const cache = {};
+  return function(...args) {
+    if (cache[args]) {
+      return cache[args];
+    }
+    const result = fn.apply(this, args);
+    cache[args] = result;
+    return result;
+  };
 }
+
+function slowFib(n) {
+  // const fibArray = [0, 1];
+  // let sum = 1;
+  // for (let i = 2; i <= n; i++) {
+  //   fibArray[i] = fibArray[i - 1] + fibArray[i - 2]
+  // }
+  // return fibArray[fibArray.length - 1];
+  if (n < 2) {
+    return n;
+  }
+  return fib(n-1) + fib(n-2);
+}
+
+const fib = memoize(slowFib);
 
 module.exports = fib;
